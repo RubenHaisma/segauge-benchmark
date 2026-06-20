@@ -1,0 +1,44 @@
+site_name: segauge medical segmentation leaderboard
+site_description: >-
+  An independent, contamination-aware, statistically-rigorous public leaderboard
+  for medical image segmentation models. Every score with a confidence interval
+  and a ranking-stability test, reproducible with one command.
+site_url: https://rubenhaisma.github.io/segauge-benchmark/
+repo_url: https://github.com/RubenHaisma/segauge-benchmark
+repo_name: RubenHaisma/segauge-benchmark
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: teal
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - scheme: slate
+      primary: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+  features:
+    - navigation.instant
+    - navigation.top
+    - content.code.copy
+    - toc.integrate
+
+nav:
+  - Leaderboard: index.md
+  - Methodology: methodology.md
+  - Reproduce: reproduce.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/RubenHaisma/segauge-benchmark

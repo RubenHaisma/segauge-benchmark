@@ -1,0 +1,30 @@
+# AMOS22 multi-organ leaderboard on Modal GPUs.
+#
+# The launch version: 15 abdominal organs, scored across genuinely different
+# whole-body CT models. AMOS is fair for these models (none trained on it). Run
+# `modal run modal_app.py::prep_amos` once first to download AMOS into the volume.
+dataset:
+  name: amos_ct
+  root: data/amos_ct
+  modality: CT
+
+n_cases: 20
+# organs omitted -> all 15; each model is scored only on the organs it supports.
+
+models:
+  - { type: totalsegmentator, fast: false, name: TotalSegmentator, device: gpu }
+  - { type: ctfm }
+  - { type: monai, highres: false }
+  - { type: moose }
+
+confidence: 0.95
+n_resamples: 2000
+seed: 0
+nsd_tolerance: 2.0
+spot_check_dice: 0.1
+
+preview: true
+preview_label: "Preview (GPU via Modal) - AMOS22 multi-organ, 4 models, N=20"
+
+cache_dir: predictions/amos
+results_path: results/amos_modal.json

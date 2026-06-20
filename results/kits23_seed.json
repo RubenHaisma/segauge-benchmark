@@ -1,0 +1,308 @@
+{
+  "benchmark": "segauge-benchmark",
+  "segauge_version": "0.2.0",
+  "preview": true,
+  "preview_label": "Preview - whole-kidney segmentation on KiTS23 (CPU)",
+  "dataset": {
+    "name": "kits23",
+    "schema": "kits23_kidney",
+    "license": "CC-BY-NC-SA-4.0",
+    "citation": "Heller et al., The KiTS23 Challenge (2023). github.com/neheller/kits23",
+    "organs": [
+      {
+        "id": 1,
+        "name": "kidney"
+      }
+    ],
+    "n_cases": 3
+  },
+  "metrics": [
+    "dice",
+    "hd95",
+    "nsd",
+    "assd"
+  ],
+  "config": {
+    "confidence": 0.95,
+    "n_resamples": 2000,
+    "seed": 0,
+    "nsd_tolerance": 2.0,
+    "spot_check_dice": 0.1
+  },
+  "models": [
+    {
+      "name": "TotalSegmentator-fast",
+      "license": "Apache-2.0",
+      "version": "2.14.0",
+      "contaminated_on": [
+        "totalsegmentator"
+      ],
+      "fair": true,
+      "per_organ": {
+        "kidney": {
+          "summary": {
+            "dice": {
+              "value": 0.9059459851056267,
+              "ci_low": 0.892422405802121,
+              "ci_high": 0.9142942896804057
+            },
+            "hd95": {
+              "value": 5.4395100413280675,
+              "ci_low": 3.767778501032135,
+              "ci_high": 8.145396872142276
+            },
+            "nsd": {
+              "value": 0.8402806990371693,
+              "ci_low": 0.7877606448071154,
+              "ci_high": 0.8704114137287388
+            },
+            "assd": {
+              "value": 1.40712797556332,
+              "ci_low": 1.0864436591754838,
+              "ci_high": 1.9015404293702123
+            }
+          },
+          "per_case": [
+            {
+              "case_id": "case_00000",
+              "dice": 0.9142942896804057,
+              "hd95": 3.7677785010321356,
+              "nsd": 0.8704114137287389,
+              "assd": 1.0864436591754838
+            },
+            {
+              "case_id": "case_00001",
+              "dice": 0.9111212598343535,
+              "hd95": 4.405354750809793,
+              "nsd": 0.8626700385756537,
+              "assd": 1.2333998381442635
+            },
+            {
+              "case_id": "case_00002",
+              "dice": 0.8924224058021208,
+              "hd95": 8.145396872142276,
+              "nsd": 0.7877606448071154,
+              "assd": 1.9015404293702125
+            }
+          ],
+          "suspect": false
+        }
+      }
+    },
+    {
+      "name": "TotalSegmentator",
+      "license": "Apache-2.0",
+      "version": "2.14.0",
+      "contaminated_on": [
+        "totalsegmentator"
+      ],
+      "fair": true,
+      "per_organ": {
+        "kidney": {
+          "summary": {
+            "dice": {
+              "value": 0.911922601392201,
+              "ci_low": 0.8621653888270729,
+              "ci_high": 0.9453269312658766
+            },
+            "hd95": {
+              "value": 6.5744804206275615,
+              "ci_low": 2.416487874893255,
+              "ci_high": 12.684577898752941
+            },
+            "nsd": {
+              "value": 0.865158436279045,
+              "ci_low": 0.7764170395834434,
+              "ci_high": 0.9332417942608863
+            },
+            "assd": {
+              "value": 1.3830288621237348,
+              "ci_low": 0.702246675372204,
+              "ci_high": 2.377995598747406
+            }
+          },
+          "per_case": [
+            {
+              "case_id": "case_00000",
+              "dice": 0.9453269312658766,
+              "hd95": 2.416487874893255,
+              "nsd": 0.9332417942608863,
+              "assd": 0.702246675372204
+            },
+            {
+              "case_id": "case_00001",
+              "dice": 0.9282754840836536,
+              "hd95": 4.6223754882364885,
+              "nsd": 0.8858164749928052,
+              "assd": 1.068844312251595
+            },
+            {
+              "case_id": "case_00002",
+              "dice": 0.8621653888270729,
+              "hd95": 12.684577898752941,
+              "nsd": 0.7764170395834434,
+              "assd": 2.377995598747406
+            }
+          ],
+          "suspect": false
+        }
+      }
+    }
+  ],
+  "analysis": {
+    "kidney": {
+      "dice": {
+        "n_cases": 3,
+        "ranking": {
+          "metric": "dice",
+          "higher_is_better": true,
+          "n_cases": 3,
+          "n_resamples": 2000,
+          "stats": [
+            {
+              "name": "TotalSegmentator",
+              "score": 0.911922601392201,
+              "p_best": 0.7365,
+              "mean_rank": 1.2635,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            },
+            {
+              "name": "TotalSegmentator-fast",
+              "score": 0.9059459851056267,
+              "p_best": 0.2635,
+              "mean_rank": 1.7365,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            }
+          ]
+        },
+        "pairwise": [
+          {
+            "a": "TotalSegmentator",
+            "b": "TotalSegmentator-fast",
+            "delta": 0.005976616286574347,
+            "ci_low": -0.0302570169750479,
+            "ci_high": 0.03103264158547092,
+            "favored": null,
+            "distinguishable": false
+          }
+        ]
+      },
+      "hd95": {
+        "n_cases": 3,
+        "ranking": {
+          "metric": "hd95",
+          "higher_is_better": false,
+          "n_cases": 3,
+          "n_resamples": 2000,
+          "stats": [
+            {
+              "name": "TotalSegmentator-fast",
+              "score": 5.4395100413280675,
+              "p_best": 0.7465,
+              "mean_rank": 1.2535,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            },
+            {
+              "name": "TotalSegmentator",
+              "score": 6.5744804206275615,
+              "p_best": 0.2535,
+              "mean_rank": 1.7465,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            }
+          ]
+        },
+        "pairwise": [
+          {
+            "a": "TotalSegmentator-fast",
+            "b": "TotalSegmentator",
+            "delta": -1.1349703792994932,
+            "ci_low": -4.539181026610665,
+            "ci_high": 1.3512906261388808,
+            "favored": null,
+            "distinguishable": false
+          }
+        ]
+      },
+      "nsd": {
+        "n_cases": 3,
+        "ranking": {
+          "metric": "nsd",
+          "higher_is_better": true,
+          "n_cases": 3,
+          "n_resamples": 2000,
+          "stats": [
+            {
+              "name": "TotalSegmentator",
+              "score": 0.865158436279045,
+              "p_best": 0.9685,
+              "mean_rank": 1.0315,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            },
+            {
+              "name": "TotalSegmentator-fast",
+              "score": 0.8402806990371693,
+              "p_best": 0.0315,
+              "mean_rank": 1.9685,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            }
+          ]
+        },
+        "pairwise": [
+          {
+            "a": "TotalSegmentator",
+            "b": "TotalSegmentator-fast",
+            "delta": 0.02487773724187566,
+            "ci_low": -0.011343605223671949,
+            "ci_high": 0.0628303805321474,
+            "favored": null,
+            "distinguishable": false
+          }
+        ]
+      },
+      "assd": {
+        "n_cases": 3,
+        "ranking": {
+          "metric": "assd",
+          "higher_is_better": false,
+          "n_cases": 3,
+          "n_resamples": 2000,
+          "stats": [
+            {
+              "name": "TotalSegmentator",
+              "score": 1.3830288621237348,
+              "p_best": 0.6315,
+              "mean_rank": 1.3685,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            },
+            {
+              "name": "TotalSegmentator-fast",
+              "score": 1.40712797556332,
+              "p_best": 0.3685,
+              "mean_rank": 1.6315,
+              "rank_ci_low": 1.0,
+              "rank_ci_high": 2.0
+            }
+          ]
+        },
+        "pairwise": [
+          {
+            "a": "TotalSegmentator",
+            "b": "TotalSegmentator-fast",
+            "delta": -0.02409911343958489,
+            "ci_low": -0.38419698380327977,
+            "ci_high": 0.4764551693771937,
+            "favored": null,
+            "distinguishable": false
+          }
+        ]
+      }
+    }
+  }
+}

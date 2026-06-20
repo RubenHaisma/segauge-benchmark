@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+site/
+
+# Large artifacts that must NEVER be committed: medical image data, model
+# weights, per-model inference environments, and cached predictions. The repo
+# stores only the small results JSON and the rendered leaderboard pages.
+data/
+predictions/
+envs/
+*.nii
+*.nii.gz
+*.dcm
+*.npz
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Scratch
+scratch/
+tasks/

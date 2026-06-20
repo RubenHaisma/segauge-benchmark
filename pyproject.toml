@@ -1,0 +1,96 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "segauge-benchmark"
+version = "0.1.0"
+description = "An independent, contamination-aware, statistically-rigorous public leaderboard for medical image segmentation models: every score with a bootstrap confidence interval and a ranking-stability test, sliced by failure mode, reproducible with one command."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Ruben Haisma" }]
+keywords = [
+    "medical-imaging",
+    "medical-image-segmentation",
+    "segmentation",
+    "benchmark",
+    "leaderboard",
+    "evaluation",
+    "metrics",
+    "dice",
+    "hd95",
+    "surface-dice",
+    "confidence-interval",
+    "ranking-stability",
+    "reproducibility",
+    "totalsegmentator",
+    "nnunet",
+    "monai",
+    "moose",
+    "ct-fm",
+    "amos",
+    "kits",
+    "radiology",
+    "computer-vision",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Healthcare Industry",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+    "segauge>=0.2.0",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "nibabel>=5.0",
+    "pyyaml>=6.0",
+    "jinja2>=3.1",
+]
+
+[project.scripts]
+segbench = "segbench.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/RubenHaisma/segauge-benchmark"
+Repository = "https://github.com/RubenHaisma/segauge-benchmark"
+Issues = "https://github.com/RubenHaisma/segauge-benchmark/issues"
+Library = "https://github.com/RubenHaisma/segauge"
+
+# Model inference runs in ISOLATED environments (see src/segbench/models/), not as
+# dependencies of this package, so the leaderboard harness itself stays light and the
+# per-model environments can be pinned and torn down independently. The leaderboard
+# consumes their NIfTI predictions; it never imports torch.
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "modal>=1.5",
+]
+docs = [
+    "mkdocs-material>=9.5",
+]
+
+# Resolve segauge from its git repository so a fresh clone reproduces without a
+# local checkout (the ranking-stability stats live in segauge 0.2.0, on main).
+[tool.uv.sources]
+segauge = { git = "https://github.com/RubenHaisma/segauge.git" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/segbench"]
+
+[tool.ruff]
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

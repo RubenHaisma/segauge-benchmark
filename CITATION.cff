@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this leaderboard or its results, please cite it."
+title: "segauge-benchmark: a reproducible, statistically-rigorous medical image segmentation leaderboard"
+authors:
+  - family-names: Haisma
+    given-names: Ruben
+repository-code: "https://github.com/RubenHaisma/segauge-benchmark"
+url: "https://rubenhaisma.github.io/segauge-benchmark/"
+license: Apache-2.0
+keywords:
+  - medical image segmentation
+  - benchmark
+  - leaderboard
+  - confidence intervals
+  - ranking stability
+  - reproducibility
+  - HD95
+  - surface dice
+references:
+  - type: software
+    title: segauge
+    authors:
+      - family-names: Haisma
+        given-names: Ruben
+    repository-code: "https://github.com/RubenHaisma/segauge"

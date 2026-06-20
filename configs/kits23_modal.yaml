@@ -1,0 +1,28 @@
+# GPU validation run on Modal: whole-kidney on KiTS23, TotalSegmentator on GPU.
+# This proves the Modal pipeline end to end before scaling to more models.
+dataset:
+  name: kits23
+  root: data/kits23
+  case_numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+
+n_cases: 20
+organs: [kidney]
+
+models:
+  - { type: totalsegmentator, fast: false, name: TotalSegmentator, device: gpu }
+  - { type: ctfm }
+  - { type: monai, highres: false }
+  - { type: moose }
+
+confidence: 0.95
+n_resamples: 2000
+seed: 0
+nsd_tolerance: 2.0
+spot_check_dice: 0.1
+
+preview: true
+preview_label: "Preview (GPU via Modal) - whole-kidney on KiTS23, 4 models, N=20"
+
+cache_dir: predictions/kits23
+results_path: results/kits23_modal.json

@@ -1,0 +1,38 @@
+# Seed run: kidney segmentation on KiTS23, scored on CPU.
+#
+# This config is the reproducible "preview" run. It compares the full-resolution
+# and 3 mm fast TotalSegmentator models on the kidney (a fair comparison, since
+# TotalSegmentator was not trained on KiTS), and optionally CT-FM if its
+# environment is provisioned. The point is to exercise the full pipeline (real
+# inference, segauge scoring, CIs, ranking stability, significance) end to end on
+# real, public data. The full multi-model, multi-organ run is the Tier-2 GPU job.
+
+dataset:
+  name: kits23
+  root: data/kits23
+  case_numbers: [0, 1, 2, 3, 4]
+
+n_cases: 5
+organs: [kidney]
+
+models:
+  # Fast (3 mm) model first so a result lands quickly; the full-resolution model
+  # follows. Predictions are cached, so order only affects when each completes.
+  - { type: totalsegmentator, fast: true }
+  - { type: totalsegmentator, fast: false, name: TotalSegmentator }
+  # CT-FM is included opportunistically; it is skipped automatically if its
+  # environment ($SEGBENCH_CTFM_PY with lighter_zoo) is not provisioned, and
+  # excluded from ranking if it fails the per-case spot-check.
+  - { type: ctfm }
+
+confidence: 0.95
+n_resamples: 2000
+seed: 0
+nsd_tolerance: 2.0
+spot_check_dice: 0.1
+
+preview: true
+preview_label: "Preview - whole-kidney segmentation on KiTS23 (CPU)"
+
+cache_dir: predictions/kits23
+results_path: results/kits23_seed.json
