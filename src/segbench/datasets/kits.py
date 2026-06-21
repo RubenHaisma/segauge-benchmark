@@ -57,6 +57,7 @@ class KiTS23(Dataset):
     name = "kits23"
     license = "CC-BY-NC-SA-4.0"
     citation = CITATION
+    url = "https://github.com/neheller/kits23"
 
     def __init__(
         self,

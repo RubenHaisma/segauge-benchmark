@@ -176,7 +176,7 @@ def assemble_results(
     """Merge per-model results into the final JSON with the ranking analysis."""
     analysis = analyze(
         scores, organ_names, list(cfg.metrics),
-        n_resamples=cfg.n_resamples, seed=cfg.seed,
+        n_resamples=cfg.n_resamples, seed=cfg.seed, confidence=cfg.confidence,
     )
     results = {
         "benchmark": "segauge-benchmark",

@@ -88,7 +88,27 @@ def _leaderboard_tables(results: dict[str, Any]) -> list[str]:
                 lines.append("**Statistical separability:**\n")
                 lines.extend(verdicts)
                 lines.append("")
+                note = _correction_note(an)
+                if note:
+                    lines.append(note)
+                    lines.append("")
     return lines
+
+
+def _correction_note(an: dict[str, Any]) -> str:
+    """One line documenting the family-wise correction, when one was applied."""
+    if an.get("correction") not in ("bonferroni",):
+        return ""
+    n = an.get("n_comparisons")
+    each = an.get("adjusted_confidence")
+    fam = an.get("confidence")
+    if not (n and each and fam):
+        return ""
+    return (
+        f"*Pairwise intervals use a Bonferroni family-wise correction over "
+        f"{n} comparisons (each computed at {each:.1%} so the family holds "
+        f"{fam:.0%}).*"
+    )
 
 
 def _significance_lines(pairwise: list[dict[str, Any]]) -> list[str]:
@@ -151,11 +171,14 @@ A leaderboard you can run yourself: `pip install segauge` and one `segbench run`
 
 """
     body = "\n".join(_leaderboard_tables(results))
+    source = f" *Source:* {ds['url']}." if ds.get("url") else ""
+    doi = f" *DOI:* {ds['doi']}." if ds.get("doi") else ""
     foot = (
         "\n---\n\n"
         "*Contamination policy:* a model is only ranked on a dataset it was not "
         "trained on. Cells marked \"no\" are shown for context but excluded from "
-        "ranking. *Dataset citation:* " + ds.get("citation", "") + "\n"
+        "ranking. *Dataset citation:* " + ds.get("citation", "")
+        + source + doi + "\n"
     )
     return head + body + foot
 

@@ -25,3 +25,7 @@ jobs:
         run: uv run ruff check .
       - name: Test
         run: uv run pytest -q
+      - name: Verify published stats reproduce from per-case scores
+        run: |
+          uv run segbench reanalyze --results results/kits23_modal.json
+          uv run segbench reanalyze --results results/kits23_seed.json

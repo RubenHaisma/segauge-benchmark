@@ -10,7 +10,7 @@ ranks in a majority of challenges, and the reported "winner" often sits inside
 the runner-up's confidence interval. This leaderboard is that critique turned
 into a running tool.
 
-!!! warning "Preview (GPU via Modal) - whole-kidney on KiTS23, 4 models, N=20"
+!!! warning "Preview (GPU via Modal) - whole-kidney on KiTS23, N=20"
     This is an early, small-N preview that demonstrates the methodology end to end on real, public data. The wide intervals are the point: they show how little a bare leaderboard number tells you at this sample size. Scaling to more models and organs is the next step.
 
 **Dataset:** kits23 (20 cases, ground-truth labels CC-BY-NC-SA-4.0). Scored with [segauge](https://github.com/RubenHaisma/segauge) v0.2.0 (95% bootstrap CI, 2000 resamples, seed 0).
@@ -38,6 +38,8 @@ A leaderboard you can run yourself: `pip install segauge` and one `segbench run`
 - **MOOSE and CT-FM are not statistically separable** (Δ=0.0148, CI includes 0)
 - **TotalSegmentator and CT-FM are not statistically separable** (Δ=0.0135, CI includes 0)
 
+*Pairwise intervals use a Bonferroni family-wise correction over 3 comparisons (each computed at 98.3% so the family holds 95%).*
+
 ---
 
-*Contamination policy:* a model is only ranked on a dataset it was not trained on. Cells marked "no" are shown for context but excluded from ranking. *Dataset citation:* Heller et al., The KiTS23 Challenge (2023). github.com/neheller/kits23
+*Contamination policy:* a model is only ranked on a dataset it was not trained on. Cells marked "no" are shown for context but excluded from ranking. *Dataset citation:* Heller et al., The KiTS23 Challenge (2023). github.com/neheller/kits23 *Source:* https://github.com/neheller/kits23.

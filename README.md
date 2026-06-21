@@ -39,20 +39,24 @@ uv run segbench run --config configs/kits23_seed.yaml --render docs
 
 # Render the site from an existing results file:
 uv run segbench render --results results/kits23_seed.json --out docs
+
+# Verify the published ranking follows exactly from the published per-case scores
+# (no inference, no GPU; this is the gate CI runs on every push):
+uv run segbench reanalyze --results results/kits23_modal.json
 ```
 
 The live leaderboard: **https://rubenhaisma.github.io/segauge-benchmark/**
 
 ## Status
 
-Early **preview**, but already real and multi-model. The current leaderboard compares **four genuinely different whole-body CT models** on whole-kidney segmentation over KiTS23 cases, run on GPU:
+Early **preview**, but already real and multi-model. The harness has adapters for **four genuinely different whole-body CT models**, run on GPU:
 
 - **TotalSegmentator** (the de-facto nnU-Net-based reference)
 - **MOOSE** (`clin_ct_organs`, from the nuclear-medicine / PET-CT world — an independent lineage)
-- **MONAI wholeBody** (the framework's own bundle)
 - **CT-FM** (a SegResNet foundation model)
+- **MONAI wholeBody** (the framework's own bundle)
 
-At N=20 the three rendered models are **statistically indistinguishable** on kidney (every pairwise difference has a confidence interval through zero) — which is precisely the point: a bare Dice table would have declared a "winner". Next steps: the AMOS22 multi-organ run (15 organs, per-organ failure slicing) and adding STU-Net.
+The current rendered KiTS run scores the **first three** on whole-kidney segmentation over 20 cases. MONAI is validated but was dropped from this N=20 render by an out-of-memory that is now fixed; it returns on the next run. At N=20 the three rendered models are **statistically indistinguishable** on kidney (every pairwise difference has a confidence interval through zero, after a Bonferroni correction for the three comparisons) — which is precisely the point: a bare Dice table would have declared a "winner". Next steps: the clean four-model re-run, the AMOS22 multi-organ run (15 organs, per-organ failure slicing), and adding STU-Net.
 
 ### Running on GPU (Modal)
 

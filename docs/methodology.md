@@ -42,6 +42,13 @@ So for every (organ, metric) we report:
   between two models. If that interval includes zero, the two are reported as
   **not statistically separable**, however different their point scores look.
 
+When several pairs are compared for the same (organ, metric), reporting them all
+inflates the chance that one looks separable by accident. The pairwise intervals
+are therefore widened with a **Bonferroni family-wise correction**: with *m*
+comparisons each interval is computed at confidence `1 - (1 - C)/m`, so the whole
+family holds the stated level *C*. A single comparison is left uncorrected. The
+page states the correction and *m* under each separability verdict.
+
 ## Contamination policy
 
 The honest weakness of any benchmark built on **public** ground truth is that
@@ -82,3 +89,18 @@ AMOS22, the TotalSegmentator dataset, MSD, and BTCV.
 
 Every number is reproducible with one command on data anyone can download. See
 [Reproduce](reproduce.md).
+
+Reproducibility here is not a promise, it is a test. The results JSON stores every
+model's **per-case** metric values, and the published ranking and significance
+verdicts are derived purely from those numbers, deterministically (fixed seed,
+fixed resample count). So the statistics can be regenerated with no inference and
+no GPU:
+
+```bash
+segbench reanalyze --results results/kits23_modal.json
+```
+
+This recomputes the analysis from the per-case scores and exits non-zero if it
+disagrees with what is published. **It runs in CI on every push**, so the headline
+("#1 is not separable from #2") provably follows from the per-case data on the
+page, not from a number we typed in.

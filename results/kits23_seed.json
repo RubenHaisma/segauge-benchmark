@@ -14,7 +14,8 @@
         "name": "kidney"
       }
     ],
-    "n_cases": 3
+    "n_cases": 3,
+    "url": "https://github.com/neheller/kits23"
   },
   "metrics": [
     "dice",
@@ -153,6 +154,10 @@
     "kidney": {
       "dice": {
         "n_cases": 3,
+        "confidence": 0.95,
+        "n_comparisons": 1,
+        "correction": "none",
+        "adjusted_confidence": 0.95,
         "ranking": {
           "metric": "dice",
           "higher_is_better": true,
@@ -191,6 +196,10 @@
       },
       "hd95": {
         "n_cases": 3,
+        "confidence": 0.95,
+        "n_comparisons": 1,
+        "correction": "none",
+        "adjusted_confidence": 0.95,
         "ranking": {
           "metric": "hd95",
           "higher_is_better": false,
@@ -229,6 +238,10 @@
       },
       "nsd": {
         "n_cases": 3,
+        "confidence": 0.95,
+        "n_comparisons": 1,
+        "correction": "none",
+        "adjusted_confidence": 0.95,
         "ranking": {
           "metric": "nsd",
           "higher_is_better": true,
@@ -267,6 +280,10 @@
       },
       "assd": {
         "n_cases": 3,
+        "confidence": 0.95,
+        "n_comparisons": 1,
+        "correction": "none",
+        "adjusted_confidence": 0.95,
         "ranking": {
           "metric": "assd",
           "higher_is_better": false,

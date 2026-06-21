@@ -36,6 +36,7 @@ class AMOS22(Dataset):
     schema = AMOS_CT_SCHEMA
     license = "CC-BY-4.0"
     citation = CITATION
+    url = "https://amos22.grand-challenge.org/"
 
     def __init__(self, root: Path, modality: str = "CT") -> None:
         super().__init__(root)

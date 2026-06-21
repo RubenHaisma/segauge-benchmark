@@ -2,7 +2,7 @@
   "benchmark": "segauge-benchmark",
   "segauge_version": "0.2.0",
   "preview": true,
-  "preview_label": "Preview (GPU via Modal) - whole-kidney on KiTS23, 4 models, N=20",
+  "preview_label": "Preview (GPU via Modal) - whole-kidney on KiTS23, N=20",
   "dataset": {
     "name": "kits23",
     "schema": "kits23_kidney",
@@ -14,7 +14,8 @@
         "name": "kidney"
       }
     ],
-    "n_cases": 20
+    "n_cases": 20,
+    "url": "https://github.com/neheller/kits23"
   },
   "metrics": [
     "dice",
@@ -567,6 +568,10 @@
     "kidney": {
       "dice": {
         "n_cases": 20,
+        "confidence": 0.95,
+        "n_comparisons": 3,
+        "correction": "bonferroni",
+        "adjusted_confidence": 0.9833333333333333,
         "ranking": {
           "metric": "dice",
           "higher_is_better": true,
@@ -604,8 +609,8 @@
             "a": "MOOSE",
             "b": "TotalSegmentator",
             "delta": 0.0013741418889562206,
-            "ci_low": -0.010545891163480725,
-            "ci_high": 0.01007251227045567,
+            "ci_low": -0.013541629526338044,
+            "ci_high": 0.011308031922028523,
             "favored": null,
             "distinguishable": false
           },
@@ -613,8 +618,8 @@
             "a": "MOOSE",
             "b": "CT-FM",
             "delta": 0.014829994991886575,
-            "ci_low": -0.001452905886799256,
-            "ci_high": 0.03606954086768116,
+            "ci_low": -0.004492761745697216,
+            "ci_high": 0.043978705325667215,
             "favored": null,
             "distinguishable": false
           },
@@ -622,8 +627,8 @@
             "a": "TotalSegmentator",
             "b": "CT-FM",
             "delta": 0.013455853102930354,
-            "ci_low": -0.0007011113901114034,
-            "ci_high": 0.035779195866210166,
+            "ci_low": -0.002879620499807392,
+            "ci_high": 0.042277298771281294,
             "favored": null,
             "distinguishable": false
           }
@@ -631,6 +636,10 @@
       },
       "hd95": {
         "n_cases": 20,
+        "confidence": 0.95,
+        "n_comparisons": 3,
+        "correction": "bonferroni",
+        "adjusted_confidence": 0.9833333333333333,
         "ranking": {
           "metric": "hd95",
           "higher_is_better": false,
@@ -668,8 +677,8 @@
             "a": "TotalSegmentator",
             "b": "MOOSE",
             "delta": -0.44960119153537426,
-            "ci_low": -1.813960374800661,
-            "ci_high": 0.5156054093187489,
+            "ci_low": -2.1228226043678,
+            "ci_high": 0.6429298733543066,
             "favored": null,
             "distinguishable": false
           },
@@ -677,17 +686,17 @@
             "a": "TotalSegmentator",
             "b": "CT-FM",
             "delta": -1.1105327820956181,
-            "ci_low": -2.422493584654068,
-            "ci_high": -0.06589237283925324,
-            "favored": "TotalSegmentator",
-            "distinguishable": true
+            "ci_low": -2.745590516288747,
+            "ci_high": 0.04125767372140993,
+            "favored": null,
+            "distinguishable": false
           },
           {
             "a": "MOOSE",
             "b": "CT-FM",
             "delta": -0.6609315905602443,
-            "ci_low": -1.6861418568821631,
-            "ci_high": 0.3642489286792902,
+            "ci_low": -1.8711185795501486,
+            "ci_high": 0.5618068208199802,
             "favored": null,
             "distinguishable": false
           }
@@ -695,6 +704,10 @@
       },
       "nsd": {
         "n_cases": 20,
+        "confidence": 0.95,
+        "n_comparisons": 3,
+        "correction": "bonferroni",
+        "adjusted_confidence": 0.9833333333333333,
         "ranking": {
           "metric": "nsd",
           "higher_is_better": true,
@@ -732,17 +745,17 @@
             "a": "MOOSE",
             "b": "TotalSegmentator",
             "delta": 0.009926747096829298,
-            "ci_low": 0.0011404059052023937,
-            "ci_high": 0.01708809937512969,
-            "favored": "MOOSE",
-            "distinguishable": true
+            "ci_low": -0.001575999612001758,
+            "ci_high": 0.018170008044355895,
+            "favored": null,
+            "distinguishable": false
           },
           {
             "a": "MOOSE",
             "b": "CT-FM",
             "delta": 0.028937307156924698,
-            "ci_low": 0.008890205125213508,
-            "ci_high": 0.051715751674106004,
+            "ci_low": 0.005111079933812043,
+            "ci_high": 0.05802985801838215,
             "favored": "MOOSE",
             "distinguishable": true
           },
@@ -750,15 +763,19 @@
             "a": "TotalSegmentator",
             "b": "CT-FM",
             "delta": 0.0190105600600954,
-            "ci_low": 0.0011800142067802995,
-            "ci_high": 0.03941525878575039,
-            "favored": "TotalSegmentator",
-            "distinguishable": true
+            "ci_low": -0.0019318815861937477,
+            "ci_high": 0.04443341368075359,
+            "favored": null,
+            "distinguishable": false
           }
         ]
       },
       "assd": {
         "n_cases": 20,
+        "confidence": 0.95,
+        "n_comparisons": 3,
+        "correction": "bonferroni",
+        "adjusted_confidence": 0.9833333333333333,
         "ranking": {
           "metric": "assd",
           "higher_is_better": false,
@@ -796,8 +813,8 @@
             "a": "TotalSegmentator",
             "b": "MOOSE",
             "delta": -0.03858424995017877,
-            "ci_low": -0.26237485546231154,
-            "ci_high": 0.12299691904543414,
+            "ci_low": -0.312660681532732,
+            "ci_high": 0.14419244798521638,
             "favored": null,
             "distinguishable": false
           },
@@ -805,8 +822,8 @@
             "a": "TotalSegmentator",
             "b": "CT-FM",
             "delta": -0.2957854949684059,
-            "ci_low": -0.6334270761445165,
-            "ci_high": -0.059798960945684806,
+            "ci_low": -0.717418721710646,
+            "ci_high": -0.03791954480659888,
             "favored": "TotalSegmentator",
             "distinguishable": true
           },
@@ -814,10 +831,10 @@
             "a": "MOOSE",
             "b": "CT-FM",
             "delta": -0.25720124501822705,
-            "ci_low": -0.5540978452772435,
-            "ci_high": -0.018932197417962295,
-            "favored": "MOOSE",
-            "distinguishable": true
+            "ci_low": -0.6293211075634352,
+            "ci_high": 0.026051943193390114,
+            "favored": null,
+            "distinguishable": false
           }
         ]
       }

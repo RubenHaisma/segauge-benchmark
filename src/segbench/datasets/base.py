@@ -36,6 +36,10 @@ class Dataset:
     schema: LabelSchema
     license: str
     citation: str
+    #: Canonical source of the data, so a reader can verify provenance.
+    url: str = ""
+    #: DOI of the dataset, when it has one (left blank rather than guessed).
+    doi: str = ""
     #: True only if the ground-truth labels can be redistributed; the leaderboard
     #: never re-hosts images, it publishes derived scores.
     redistribute_scores_ok: bool = True
@@ -50,10 +54,15 @@ class Dataset:
         raise NotImplementedError
 
     def describe(self) -> dict[str, object]:
-        return {
+        out: dict[str, object] = {
             "name": self.name,
             "schema": self.schema.name,
             "license": self.license,
             "citation": self.citation,
-            "organs": [{"id": o.id, "name": o.name} for o in self.schema.organs],
         }
+        if self.url:
+            out["url"] = self.url
+        if self.doi:
+            out["doi"] = self.doi
+        out["organs"] = [{"id": o.id, "name": o.name} for o in self.schema.organs]
+        return out
